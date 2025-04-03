@@ -1,8 +1,9 @@
 package com.example.todo.user;
 
-import com.example.todo.auth.dto.AuthRequestDto;
+import com.example.todo.auth.dto.AuthResponseDto;
 import com.example.todo.user.dto.DeleteUserRequestDto;
 import com.example.todo.user.dto.DeleteUserResponseDto;
+import com.example.todo.user.dto.UserRequestDto;
 import com.example.todo.user.dto.UserResponseDto;
 import com.example.todo.user.entity.UserEntity;
 import com.example.todo.user.repository.UserRepository;
@@ -23,7 +24,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserResponseDto signup(AuthRequestDto dto) {
+    public UserResponseDto signup(UserRequestDto dto) {
         UserEntity user = new UserEntity(dto.getUserName(),
                 dto.getUserEmail(),
                 dto.getUserPassword());
@@ -66,6 +67,13 @@ public class UserService {
         userRepository.delete(deletedUser);
 
         return new DeleteUserResponseDto(deletedUser.getUserid(), deletedUser.getName());
+    }
+
+    // id(email), pw(password) 입력
+    public AuthResponseDto login(String userEmail, String userPassword) {
+        return userRepository.findByEmailAndPassword(userEmail, userPassword)
+                .map(user -> new AuthResponseDto(user.getUserid(), user.getName()))
+                .orElse(null);
     }
 
 }

@@ -1,0 +1,25 @@
+<!-- templates/session-home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Session Home</title>
+</head>
+<body>
+<h2>Session Home</h2>
+
+<div th:if="${loginUser != null}">
+    <p><strong th:text="${loginUser.userName}">사용자이름</strong>님, 환영합니다!</p>
+
+    <form th:action="@{/auth/session-logout}" method="post">
+        <button type="submit">로그아웃</button>
+    </form>
+</div>
+
+<div th:if="${loginUser == null}">
+    <p>로그인이 필요합니다.</p>
+    <a th:href="@{/auth}">로그인 페이지로 이동</a>
+</div>
+
+</body>
+</html>

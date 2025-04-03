@@ -1,7 +1,6 @@
 package com.example.todo.user;
 
 
-import com.example.todo.auth.dto.AuthRequestDto;
 import com.example.todo.user.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ public class UserController {
 
     // 유저 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<UserResponseDto> signup(@RequestBody AuthRequestDto dto) {
+    public ResponseEntity<UserResponseDto> signup(@RequestBody UserRequestDto dto) {
         // 이름, 이메일, 비밀번호 입력
         UserResponseDto signupResponseDto = userService.signup(dto);
         return new ResponseEntity<>(signupResponseDto, HttpStatus.CREATED);
