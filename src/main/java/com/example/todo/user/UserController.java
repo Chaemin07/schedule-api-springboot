@@ -22,7 +22,8 @@ public class UserController {
         UserResponseDto signupResponseDto = userService.signup(dto);
         return new ResponseEntity<>(signupResponseDto, HttpStatus.CREATED);
     }
-
+    
+    // 유저 전체 조회
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> findAllUsers() {
         List<UserResponseDto> allUsers = userService.getAllUsers();
@@ -47,7 +48,8 @@ public class UserController {
 
         return ResponseEntity.ok(new MessageResponseDto(HttpStatus.OK.value(), "비밀번호가 변경되었습니다."));
     }
-
+    
+    // 유저 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDto> deleteUser(
             @PathVariable Long id,
