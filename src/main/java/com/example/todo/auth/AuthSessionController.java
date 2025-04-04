@@ -23,10 +23,9 @@ public class AuthSessionController {
 
     /**
      * 로그인
-     *
-     * @return
      * @ userEmail - 로그인 ID(이메일)
      * @ userPassword - 로그인 PW(비밀번호)
+     * @return
      */
     @PostMapping
     public String login(
